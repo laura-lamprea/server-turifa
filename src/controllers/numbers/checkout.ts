@@ -1,22 +1,27 @@
 import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
-import { updateNumberById, cheackout, validateIds } from "../../repository/number/numbersService";
+import { updateNumberById, cheackout, validateIds, validateReference } from "../../repository/number/numbersService";
 import SendPaymentConfirmationMessage from '../../chatbot/sendPaymentConfirmationMessage';
+import SendAdminMessage from '../../chatbot/sendAdminMessage';
 
 const checkout = async (req: Request, res: Response) => {
     try {
-        const { ids, file, phone } = req.body;
-        if (!file || !ids)
+        const { ids, file, phone, reference } = req.body;
+        if (!file || !ids || !phone || !reference)
             throw new ErrorHandler("Fields are required", 400);
-        if (!file.secure_url || !file.asset_id) {
+        if (!file.secure_url || !file.asset_id)
             throw new ErrorHandler("Invalid file format", 400);
-        }
+
+        const isReferenceValid = await validateReference(reference)
+        if (isReferenceValid.length > 0)
+            throw new ErrorHandler("Reference already exists", 400);
 
         const areAllIdsValid = await validateIds(ids, true);
         if (!areAllIdsValid)
             throw new ErrorHandler("ID is invalid", 400);
 
         const formFile = {
+            ref: reference,
             asset_id: file.asset_id,
             secure_url: file.secure_url,
             creation_date: new Date(),
@@ -34,12 +39,11 @@ const checkout = async (req: Request, res: Response) => {
             }))
         );
 
-        if (!updatedNumbers)
-            throw new ErrorHandler("ERROR_CANNOT_UPDATING_NUMBERS", 400);
-
+        const phoneAdmin = process.env.PHONE_ADMIN;
         const sendMessageResponse = await SendPaymentConfirmationMessage(phone)
-        if (!sendMessageResponse)
-            throw new ErrorHandler("ERROR_CANNOT_SENDING_MESSAGE", 400);
+        const sendMessageAdminResponse = await SendAdminMessage(phoneAdmin!)
+        if (!sendMessageResponse || !sendMessageAdminResponse)
+            throw new ErrorHandler("ERROR_CANNOT_SEND_MESSAGE", 400);
 
         return res.status(200).send({ message: "success", data: updatedNumbers });
     } catch (error) {

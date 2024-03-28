@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
 import { updateNumberById } from "../../repository/number/numbersService";
 import { sendToRejected, validateIdforStatus } from "../../repository/admin/adminService";
+import SendPaymentNotApproved from '../../chatbot/sendPaymentNotApproved';
 
 const changeToRejected = async (req: Request, res: Response) => {
     try {
@@ -26,6 +27,11 @@ const changeToRejected = async (req: Request, res: Response) => {
                 }
             })
         );
+
+        const phones = [...new Set(areAllIdsValid.map((num) => num.phone))];
+        if (phones.length > 0)
+            phones.map(phone => SendPaymentNotApproved(phone!))
+        
         return res.status(200).send({ message: "success" });
     } catch (error) {
         const customInstance = error instanceof ErrorHandler;

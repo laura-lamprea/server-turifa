@@ -22,7 +22,7 @@ const SendBookingMessage = async (phone: string, updatedNumbers: INumbers[]) => 
         const result = await SendMessage(`57${phone}@c.us`, message);
         return result;
     } catch (error) {
-        throw new ErrorHandler("ERROR_CANNOT_SENDING_MESSAGE", 400);
+        throw new ErrorHandler("ERROR_CANNOT_SEND_MESSAGE", 400);
     }
 };
 

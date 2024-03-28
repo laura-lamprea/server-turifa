@@ -29,9 +29,9 @@ const reserveNumber = async (req: Request, res: Response) => {
             throw new ErrorHandler("ERROR_CANNOT_RESERVING_NUMBERS", 400);
         
         const sendMessageResponse  = await SendBookingMessage(phone, updatedNumbers)
-        if (!sendMessageResponse ) {
-            throw new ErrorHandler("ERROR_CANNOT_SENDING_MESSAGE", 400);
-        }
+        if (!sendMessageResponse ) 
+            throw new ErrorHandler("ERROR_CANNOT_SEND_MESSAGE", 400);
+        
         return res.status(200).send({ message: "success", data: updatedNumbers });
     } catch (error) {
         const customInstance = error instanceof ErrorHandler;

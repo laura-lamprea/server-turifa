@@ -25,9 +25,9 @@ const getNumbers = async () => {
         select: {
             id: true,
             num: true,
-            isReserved:true,
-            payment_status: true,   
-        },  
+            isReserved: true,
+            payment_status: true,
+        },
     });
     return numbers;
 }
@@ -149,6 +149,15 @@ const cheackout = async (data: ICheckout) => {
     return result;
 }
 
+const validateReference = async (reference: string) => {
+    const result = await prisma.invoice.findMany({
+        where: {
+            ref: reference
+        }
+    });
+    return result;
+}
 
 
-export { getNumbers, getMyNumbers, getAllReservedNumbers, updateNumberById, validateIds, getNumberReserved, cheackout, getNumberToReject };
+
+export { getNumbers, getMyNumbers, getAllReservedNumbers, updateNumberById, validateIds, getNumberReserved, cheackout, getNumberToReject, validateReference };
