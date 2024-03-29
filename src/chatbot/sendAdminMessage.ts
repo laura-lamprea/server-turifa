@@ -4,7 +4,7 @@ import SendMessage from './sendMessage';
 const SendAdminMessage = async (phone: string) => {
     try {
         if (!phone) throw new ErrorHandler("ERROR_PHONE_REQUIRED", 400);
-        const message = `📬🔔*¡Han hecho un nuevo pago!*📥💰
+        const message = `📬🔔¡Un nuevo pago!💰
             \n👋 ¡Hola! 🤩 Somos *TuRifa* 🍀
             \n👀 Se ha registrado un nuevo pago. Verifícalo en el siguiente enlace: ${process.env.URL_MANAGEMENT}`;
         const result = await SendMessage(`57${phone}@c.us`, message);

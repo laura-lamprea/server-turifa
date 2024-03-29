@@ -2,7 +2,10 @@ import ErrorHandler from "../utils/errorHandler";
 import { BaileysProvider } from "@bot-whatsapp/provider-baileys"
 import { createProvider } from '@bot-whatsapp/bot'
 const adapterProvider = createProvider(BaileysProvider)
-
+adapterProvider.saveCredsGlobal
+adapterProvider.on('connection', (stream) => {
+    console.log('someone connected!');
+  });
 const SendMessage = async (phone: string, message: any) => {
     try {
         if (!phone || !message)
