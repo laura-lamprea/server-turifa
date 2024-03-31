@@ -6,8 +6,8 @@ import SendAdminMessage from '../../chatbot/sendAdminMessage';
 
 const checkout = async (req: Request, res: Response) => {
     try {
-        const { ids, file, phone, reference } = req.body;
-        if (!file || !ids || !phone || !reference)
+        const { ids, file, phone, reference, entity } = req.body;
+        if (!file || !ids || !phone || !reference || !entity)
             throw new ErrorHandler("Fields are required", 400);
         if (!file.secure_url || !file.asset_id)
             throw new ErrorHandler("Invalid file format", 400);
@@ -22,6 +22,7 @@ const checkout = async (req: Request, res: Response) => {
 
         const formFile = {
             ref: reference,
+            bank: entity,
             asset_id: file.asset_id,
             secure_url: file.secure_url,
             creation_date: new Date(),
