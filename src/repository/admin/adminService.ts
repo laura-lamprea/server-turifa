@@ -59,4 +59,15 @@ const createAdmins = async (data: IAdmin) => {
     return result;
 }
 
-export { validateIdforStatus, getUserByEmail, createAdmins, getAllRejected, sendToRejected };
+const getWinner = async (num: string) => {
+    const result = await prisma.numbers.findFirst({
+        where: { num, payment_status: 'approved' },
+        select: {
+            name: true,
+            phone: true,
+        }
+    });
+    return result;
+}
+
+export { validateIdforStatus, getUserByEmail, createAdmins, getAllRejected, sendToRejected, getWinner };

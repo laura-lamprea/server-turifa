@@ -1,9 +1,9 @@
-import ErrorHandler from "../utils/errorHandler";
-import SendMessage from './sendMessage';
+import ErrorHandler from "../../utils/errorHandler";
+import SendMessage from '../sendMessage';
 
 const SendPaymentConfirmationMessage = async (phone: string) => {
     try {
-        const message = `📥*¡Captura Recibida!*✔️
+        const message = `📥¡ *Captura Recibida* !✔️
             \n👋 ¡Hola! 🤩 Somos *TuRifa* 🍀
             \n📸 ¡Hemos recibido tu captura de pantalla del comprobante de pago!
             \n🔍 Estamos verificando la información y te confirmaremos en un plazo máximo de *24 horas* ⏳ si tu pago ha sido correctamente procesado. ✅

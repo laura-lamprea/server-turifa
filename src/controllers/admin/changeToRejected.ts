@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
 import { updateNumberById } from "../../repository/number/numbersService";
 import { sendToRejected, validateIdforStatus } from "../../repository/admin/adminService";
-import SendPaymentNotApproved from '../../chatbot/sendPaymentNotApproved';
+import SendPaymentNotApproved from '../../chatbot/messages/sendPaymentNotApproved';
 
 const changeToRejected = async (req: Request, res: Response) => {
     try {

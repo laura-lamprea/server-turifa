@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
 import { updateNumberById } from "../../repository/number/numbersService";
 import { validateIdforStatus } from "../../repository/admin/adminService";
-import SendApprovedMessage from '../../chatbot/sendApprovedMessage';
+import SendApprovedMessage from '../../chatbot/messages/sendApprovedMessage';
 
 const changeStatus = async (req: Request, res: Response) => {
     try {

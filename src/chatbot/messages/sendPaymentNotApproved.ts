@@ -1,10 +1,10 @@
-import ErrorHandler from "../utils/errorHandler";
-import SendMessage from './sendMessage';
+import ErrorHandler from "../../utils/errorHandler";
+import SendMessage from '../sendMessage';
 
 const SendPaymentNotApproved = async (phone: string) => {
     try {
         if (!phone) throw new ErrorHandler("ERROR_PHONE_REQUIRED", 400);
-        const message = `🚫*Pago Rechazado*🚫
+        const message = `🚫 *Pago Rechazado* 🚫
             \n👋 ¡Hola! Lamentamos informarte que ha habido una irregularidad al verificar tu pago en *TuRifa*.
             \n🔍 Por motivos de seguridad, hemos rechazado la reserva asociada a tu número de teléfono. 📱
             \n🔄 Como resultado, el o los números que intentaste reservar ahora está disponibles para otra persona. 😔

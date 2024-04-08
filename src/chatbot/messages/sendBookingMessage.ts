@@ -1,5 +1,5 @@
-import ErrorHandler from "../utils/errorHandler";
-import SendMessage from './sendMessage';
+import ErrorHandler from "../../utils/errorHandler";
+import SendMessage from '../sendMessage';
 
 export interface INumbers {
     num?: string;

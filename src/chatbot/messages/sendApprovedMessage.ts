@@ -1,9 +1,9 @@
-import ErrorHandler from "../utils/errorHandler";
-import SendMessage from './sendMessage';
+import ErrorHandler from "../../utils/errorHandler";
+import SendMessage from '../sendMessage';
 
 const SendApprovedMessage = async (phone: string) => {
     try {
-        const message = `💰✔️*¡Pago Aprobado!*💯
+        const message = `💰✔️¡ *Pago Aprobado* !💯
             \n👋 ¡Hola! 🤩 Somos *TuRifa* 🍀
             \n🎟️ ¡Tu pago ha sido *exitosamente verificado*! Ahora estás oficialmente participando en nuestra rifa! 🥳
             \n👀 Puedes consultar tu ticket a través del siguiente enlace: ${process.env.URL_MYNUMBERS}

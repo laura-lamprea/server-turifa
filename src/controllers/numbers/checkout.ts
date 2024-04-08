@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
 import { updateNumberById, cheackout, validateIds, validateReference } from "../../repository/number/numbersService";
-import SendPaymentConfirmationMessage from '../../chatbot/sendPaymentConfirmationMessage';
-import SendAdminMessage from '../../chatbot/sendAdminMessage';
+import SendPaymentConfirmationMessage from '../../chatbot/messages/sendPaymentConfirmationMessage';
+import SendAdminMessage from '../../chatbot/messages/sendAdminMessage';
 
 const checkout = async (req: Request, res: Response) => {
     try {

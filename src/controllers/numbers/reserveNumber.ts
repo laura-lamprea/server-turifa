@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import ErrorHandler from "../../utils/errorHandler";
 import { updateNumberById, getMyNumbers, validateIds } from "../../repository/number/numbersService";
-import SendBookingMessage from '../../chatbot/sendBookingMessage';
+import SendBookingMessage from '../../chatbot/messages/sendBookingMessage';
 
 const reserveNumber = async (req: Request, res: Response) => {
     try {
